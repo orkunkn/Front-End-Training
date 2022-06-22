@@ -14,9 +14,11 @@ const game = function () {
       document.querySelector('.number').textContent = secretNumber;
       document.querySelector('body').style.backgroundColor = '#60b347';
       document.querySelector('.number').style.width = '30rem';
-      highScore++;
-      document.querySelector('.label-highscore').textContent =
-        '🥇 Highscore: ' + highScore;
+      if (score > highScore) {
+        highScore = score;
+        document.querySelector('.label-highscore').textContent =
+          '🥇 Highscore: ' + highScore;
+      }
     } else if (guess > secretNumber) {
       if (score > 1) {
         document.querySelector('.message').textContent = 'Too big!';
@@ -36,7 +38,6 @@ const game = function () {
     }
   });
 };
-game();
 
 document.querySelector('.again').addEventListener('click', function () {
   score = 20;
@@ -47,5 +48,6 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
   document.querySelector('.guess').value = '';
-  game();
 });
+
+game();
